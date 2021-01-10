@@ -7,7 +7,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div id="navbarContent" class="collapse navbar-collapse">
+        <div id="navbarContent" class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item active">
                     <a href="/" class="nav-link">Login</a>
