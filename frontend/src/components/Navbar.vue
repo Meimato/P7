@@ -10,13 +10,13 @@
         <div id="navbarContent" class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a href="/" class="nav-link">Login</a>
+                    <span class="nav-link"><router-link to="/">Home</router-link></span>
                 </li>
                 <li class="nav-item">
-                    <a href="/signup" class="nav-link">Signup</a>
+                    <span class="nav-link"><router-link to="/signup">Signup</router-link></span>
                 </li>
                 <li class="nav-item">
-                    <a href="/" class="nav-link">Disconnect</a>
+                    <span class="nav-link"><router-link to="/">Disconnect</router-link></span>
                 </li>
             </ul>
         </div>
@@ -26,10 +26,7 @@
 
 <script>
 export default {
-    name: 'Navbar',
-    props: {
-        msg: String
-    }
+    name: 'Navbar'
 }
 </script>
 
