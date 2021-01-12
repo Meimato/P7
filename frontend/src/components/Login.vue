@@ -9,9 +9,9 @@
                 <form class="form-group">
                     <input type="email" name="user-mail" id="user-mail" placeholder="E-mail" class="form-control col rounded-corners my-3 py-3" required>
                     <input type="password" name="user-password" id="user-password" class="form-control col rounded-corners mb-3 py-3" placeholder="Mot de passe" required>
-                    <button type="submit" id="btn-login" value="login" class="btn btn-primary btn-block rounded-corners text-white p-2">Connexion</button>
+                    <button type="submit" @click="login" id="btn-login" value="login" class="btn btn-primary btn-block rounded-corners text-white p-2">Connexion</button>
                     <hr>
-                    <router-link to="/signup"><button type="button" id="btn-signup" class="btn btn-success btn-block rounded-corners text-white p-2">Créer un compte</button></router-link>
+                    <router-link to="/api/auth/signup"><button type="button" id="btn-signup" class="btn btn-success btn-block rounded-corners text-white p-2">Créer un compte</button></router-link>
                 </form>
             </section>
         </div>
@@ -20,7 +20,13 @@
 
 <script>
 export default {
-    name: 'Login'
+    name: 'Login',
+    methods: {
+        login(event){
+            event.preventDefault();
+            console.log("Eccolo")
+        }
+    }
 }
 </script>
 
