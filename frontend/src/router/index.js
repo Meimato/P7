@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Main from '../views/Main.vue'
 
@@ -9,12 +9,12 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/api/auth/login',
-    name: 'Home',
-    component: Home
+    name: 'UserLogin',
+    component: Login
   },
   {
     path: '/api/auth/signup',
-    name: 'Signup',
+    name: 'UserSignup',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
@@ -22,7 +22,7 @@ const routes = [
   },
   {
     path: '/',
-    name: 'Main',
+    name: 'MainPage',
     component: Main
   }
 ]

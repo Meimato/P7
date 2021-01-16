@@ -1,18 +1,18 @@
 <template>
-  <div class="home">
+  <div class="login">
     <Navbar></Navbar>
-    <Login></Login>
+    <UserLogin></UserLogin>
   </div>
 </template>
 
 <script>
 import Navbar from '../components/Navbar.vue'
-import Login from '../components/Login.vue'
+import UserLogin from '../components/UserLogin.vue'
 
 export default {
-  name: 'Home',
+  name: 'Login',
   components: {
-    Login,
+    UserLogin,
     Navbar
   }
 }

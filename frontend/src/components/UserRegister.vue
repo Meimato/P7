@@ -21,8 +21,8 @@
               />
               <input
                 type="email"
-                name="user-mail"
-                id="user-mail"
+                name="user-email"
+                id="user-email"
                 placeholder="E-mail"
                 class="form-control col rounded-corners my-3"
                 required
@@ -42,6 +42,7 @@
               </p>
               <button
                 type="submit"
+                @click="signup"
                 id="btn-signup"
                 class="btn btn-success btn-block rounded-corners text-white"
               >
@@ -57,7 +58,40 @@
 
 <script>
 export default {
-  name: "Register",
+  name: "UserRegister",
+  methods: {
+    signup(event) {
+      event.preventDefault();
+      const myForm = document.querySelector("form");
+      const myUserName = myForm["user-name"].value;
+      const myUserEmail = myForm["user-email"].value;
+      const myUserPassword = myForm["user-password"].value;
+
+      if (myUserName !== "" && myUserEmail !== "" && myUserPassword !== "") {
+        const myUserSignup = {
+          username: myUserName,
+          email: myUserEmail,
+          password: myUserPassword,
+        };
+
+        fetch("http://localhost:3000/api/auth/signup", {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(myUserSignup),
+        })
+          .then(()=>{
+            console.log("User Created!");
+            this.$router.push('/');
+            })
+          .catch(()=>{console.log("Cannot create the user!")});
+      } else {
+        console.log("Please, fill each field!");
+      }
+    },
+  },
 };
 </script>
 

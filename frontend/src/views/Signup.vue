@@ -1,19 +1,19 @@
 <template>
   <div class="Signup">
     <Navbar></Navbar>
-    <Register></Register>
+    <UserRegister></UserRegister>
   </div>
 </template>
 
 <script>
 import Navbar from '../components/Navbar.vue'
-import Register from '../components/Register.vue'
+import UserRegister from '../components/UserRegister.vue'
 
 export default {
   name: 'Signup',
   components: {
     Navbar,
-    Register
+    UserRegister
   }
 }
 </script>

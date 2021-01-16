@@ -16,9 +16,16 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // DB Connection
+const db = require("./models/index.js");
+db.sequelize.sync({ force: true }).then(() => {
+  console.log("Drop and re-sync db.");
+});
+
+require("./routes/user.routes.js")(app);
 
 // Routes
 
@@ -28,11 +35,13 @@ app.use(bodyParser.json());
  * Signup
  * Login
  */
+
 app.post("/api/auth/login", (req, res) => {
-  res.json({ username: "TestUsername", password: "12345" });
+  res.json( req.body );
 });
+
 app.post("/api/auth/signup", (req, res) => {
-  res.json({ username: "RegisteredUsername", password: "67890" });
+  res.json( req.body );
 });
 
 /**
@@ -47,22 +56,8 @@ app.post("/api/auth/signup", (req, res) => {
  *
  */
 
-app.get("/api/article/");
-
-/**
- * Article model
- *
- * Author REQ
- * Title REQ
- * Description REQ
- * Date REQ
- * Comments NULL [Array Article]
- * Image NULL
- * Link NULL
- * Likes = 0
- * Dislikes = 0
- * UserLikes [Array userIDs]
- * UserDislikes [Array userIDs]
- */
+app.get("/", (req, res) => {
+  res.json({ msg: "HELLO!"});
+});
 
 module.exports = app;

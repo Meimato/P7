@@ -73,6 +73,11 @@
 <script>
 export default {
   name: "RecentArticle",
+  created(res) {
+    fetch("http://localhost:3000/")
+      .then(res => console.log(res.json()))
+      .catch(err => res.json(err))
+  }
 };
 </script>
 
