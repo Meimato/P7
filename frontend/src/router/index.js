@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Signup from '../views/Signup.vue'
 import Main from '../views/Main.vue'
+import CreateArticle from '../views/CreateArticle.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const routes = [
     path: '/',
     name: 'MainPage',
     component: Main
+  },
+  {
+    path: '/api/article/write',
+    name: 'WriteArticle',
+    component: CreateArticle
   }
 ]
 

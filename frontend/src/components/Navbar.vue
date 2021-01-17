@@ -10,6 +10,9 @@
         <div id="navbarContent" class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
+                    <span class="nav-link"><router-link to="/api/article/write">Write</router-link></span>
+                </li>
+                <li class="nav-item">
                     <span class="nav-link"><router-link to="/api/auth/signup">Signup</router-link></span>
                 </li>
                 <li class="nav-item">
@@ -17,7 +20,6 @@
                 </li>
             </ul>
         </div>
-        
     </nav>    
 </template>
 

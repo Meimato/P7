@@ -6,14 +6,14 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar.vue'
-import UserLogin from '../components/UserLogin.vue'
+import Navbar from "../components/Navbar.vue";
+import UserLogin from "../components/UserLogin.vue";
 
 export default {
-  name: 'Login',
+  name: "Login",
   components: {
     UserLogin,
-    Navbar
-  }
-}
+    Navbar,
+  },
+};
 </script>
