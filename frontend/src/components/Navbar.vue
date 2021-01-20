@@ -16,7 +16,7 @@
                     <span class="nav-link"><router-link to="/api/auth/signup">Signup</router-link></span>
                 </li>
                 <li class="nav-item">
-                    <span class="nav-link"><router-link to="/api/auth/login">Disconnect</router-link></span>
+                    <span class="nav-link"><router-link to="/api/auth/login">Login</router-link></span>
                 </li>
             </ul>
         </div>

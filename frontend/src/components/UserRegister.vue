@@ -76,17 +76,26 @@ export default {
 
         fetch("http://localhost:3000/api/auth/signup", {
           method: "POST",
+          credentials: 'same-origin',
           headers: {
             accept: "application/json",
             "content-type": "application/json",
           },
           body: JSON.stringify(myUserSignup),
         })
-          .then(()=>{
-            console.log("User Created!");
-            this.$router.push('/');
-            })
-          .catch(()=>{console.log("Cannot create the user!")});
+          .then((data) => {
+            if (data.status === 401) {
+              this.$router.go();
+            } else {
+              data
+                .json()
+                .then()
+                .catch(()=>{console.log("Cannot create the user!")});
+
+                this.$router.push("login");
+            }
+          })
+          .catch(()=>{console.log("Fetch error!")});
       } else {
         console.log("Please, fill each field!");
       }

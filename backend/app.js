@@ -26,38 +26,6 @@ db.sequelize.sync({ force: true }).then(() => {
 });
 
 require("./routes/user.routes.js")(app);
-
-// Routes
-
-/**
- * User Route
- *
- * Signup
- * Login
- */
-
-app.post("/api/auth/login", (req, res) => {
-  res.json( req.body );
-});
-
-app.post("/api/auth/signup", (req, res) => {
-  res.json( req.body );
-});
-
-/**
- * Article Route
- *
- * get all
- * get one
- * create
- * delete
- * modify
- * setlike
- *
- */
-
-app.get("/", (req, res) => {
-  res.json({ msg: "HELLO!"});
-});
+require("./routes/article.routes.js")(app);
 
 module.exports = app;

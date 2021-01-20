@@ -73,11 +73,32 @@
 <script>
 export default {
   name: "RecentArticle",
-  created(res) {
-    fetch("http://localhost:3000/")
-      .then(res => console.log(res.json()))
-      .catch(err => res.json(err))
-  }
+  data() {
+    return {
+      articles: {
+      },
+    };
+  },
+  mounted() {
+
+    const myKey = sessionStorage.getItem('key');
+    
+    fetch("http://localhost:3000/api/article", {
+      method: "GET",
+      credentials: 'same-origin',
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: myKey,
+      },
+    })
+      .then((data) => {
+        this.articles = data.json();
+        console.log(this.articles);
+      })
+      .catch(()=>{console.log("Cannot fetch any article!")});
+  },
+  
 };
 </script>
 

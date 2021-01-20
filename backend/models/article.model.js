@@ -15,24 +15,23 @@
  */
 
 module.exports = (sequelize, Sequelize) => {
-    const Article = sequelize.define("Article", {
-        title: {
-            type: Sequelize.STRING
-        },
-        description: {
-            type: Sequelize.STRING
-        },
-        author: {
-            type: Sequelize.STRING
-        },
-        likes: {
-            type: Sequelize.INTEGER
-        },
-        dislikes: {
-            type: Sequelize.INTEGER
-        }
+  const Article = sequelize.define("Article", {
+    title: {
+      type: Sequelize.STRING,
+    },
+    description: {
+      type: Sequelize.STRING,
+    },
+    author: {
+      type: Sequelize.INTEGER,
+    },
+    likes: {
+      type: Sequelize.INTEGER,
+    },
+    dislikes: {
+      type: Sequelize.INTEGER,
+    },
+  });
 
-    });
-
-    return Article;
+  return Article;
 };

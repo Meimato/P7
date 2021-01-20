@@ -58,8 +58,7 @@ export default {
       const myUserMail = myForm["user-mail"].value;
       const myUserPassword = myForm["user-password"].value;
 
-      if (myUserMail !== '' && myUserPassword !== '') {
-
+      if (myUserMail !== "" && myUserPassword !== "") {
         const myUserLogin = {
           email: myUserMail,
           password: myUserPassword,
@@ -67,14 +66,32 @@ export default {
 
         fetch("http://localhost:3000/api/auth/login", {
           method: "POST",
+          credentials: 'same-origin',
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
           body: JSON.stringify(myUserLogin),
-        }).catch(() => {
-          console.log("Fetch Error!");
-        });
+        })
+          .then((data) => {
+            if (data.status === 401) {
+              this.$router.go();
+            } else {
+              data
+                .json()
+                .then(function(result) {
+                  console.log("You are now logged!");
+                  sessionStorage.setItem("key", JSON.stringify(result));
+                })
+                .catch(()=>{console.log("Cannot retrieve user!")});
+            }
+          })
+          .then(
+            this.$router.push("/")
+          )
+          .catch(() => {
+            console.log("Fetch Error!");
+          });
       } else {
         console.log("vuote");
       }
