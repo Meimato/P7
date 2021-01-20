@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 exports.create = (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
-  const author = 0;
+  const author = req.body.userId;
   const likes = 0;
   const dislikes = 0;
 
