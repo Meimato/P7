@@ -23,17 +23,16 @@
             placeholder="Mot de passe"
             required
           />
-          <router-link to="/">
-            <button
-              type="submit"
-              @click="login"
-              id="btn-login"
-              value="login"
-              class="btn btn-primary btn-block rounded-corners text-white p-2"
-            >
-              Connexion
-            </button>
-          </router-link>
+
+          <button
+            type="submit"
+            @click="login"
+            id="btn-login"
+            value="login"
+            class="btn btn-primary btn-block rounded-corners text-white p-2"
+          >
+            Connexion
+          </button>
           <hr />
           <router-link to="/api/auth/signup"
             ><button
@@ -85,7 +84,7 @@ export default {
                   console.log("You are now logged!");
                   sessionStorage.setItem("key", JSON.stringify(result));
                 })
-                .then(this.$router.push("/").catch(()=>{}))
+                .then(this.$router.push("/").catch(() => {}))
                 .catch(() => {
                   console.log("Cannot retrieve user!");
                 });
@@ -95,14 +94,9 @@ export default {
           .catch(() => {
             console.log("Fetch Error!");
           });
-
-
-
       } else {
         console.log("vuote");
       }
-
-
     },
   },
 };

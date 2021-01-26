@@ -7,6 +7,7 @@ module.exports = (app) => {
 
   router.post("/write", auth, articles.create);
   router.get("/", auth, articles.findAll);
+  router.get("/:id", auth, articles.findOne);
 
   app.use("/api/article", router);
 };

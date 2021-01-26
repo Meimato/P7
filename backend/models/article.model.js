@@ -23,7 +23,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     author: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.STRING,
     },
     likes: {
       type: Sequelize.INTEGER,
