@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-6 mx-auto p-5 text-left">
+      <div class="col-12 col-md-6 mx-auto p-5 text-left">
         <form id="write-article" class="write-article">
           <div class="form-group">
             <label for="article-title">Titre:</label>
@@ -58,6 +58,7 @@ export default {
 
         let myFormData = new FormData(document.getElementById("write-article"));
         myFormData.append("userId", myParsedKey.userId);
+
         fetch("http://localhost:3000/api/article/write", {
           method: "POST",
           credentials: "same-origin",

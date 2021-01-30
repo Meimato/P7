@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <a href="#" class="navbar-brand font-weight-bold d-flex align-items-center">
+    <div class="navbar-brand font-weight-bold d-flex align-items-center">
       <img
         src="../assets/icon.svg"
         class="primary-text"
@@ -8,7 +8,7 @@
         alt="Groupomania logo"
       />
       <router-link to="/" tag="span">Groupomania</router-link>
-    </a>
+    </div>
     <button
       class="navbar-toggler"
       type="button"
@@ -60,15 +60,16 @@ export default {
 </script>
 
 <style scoped>
-a.navbar-brand,
-a.navbar-brand:visited {
+.navbar-brand,
+.navbar-brand:visited {
   color: #fd2d01;
 }
-a.navbar-brand span {
+.navbar-brand span {
   text-decoration: none;
 }
 
-a.navbar-brand:hover {
+.navbar-brand:hover {
+  cursor: pointer;
   color: #166fe5;
 }
 </style>

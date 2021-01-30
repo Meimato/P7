@@ -1,13 +1,26 @@
 <template>
-  <div class="read-article" onload="getDetails()">
+  <div class="read-article">
     <article class="container">
       <div id="articles-list" class="row d-flex flex-column p-0">
         <div class="col card border-light shadow text-left px-3 pt-3">
-          <div class="row">
-            <h2 id="title" class="text-left p-3"></h2>
+          <div class="row align-items-center">
+            <div class="col-9">
+              <h2 id="title" class="text-left p-3"></h2>
+            </div>
+            <div class="col-2">
+              <div class="d-flex flex-row justify-content-start">
+                <div class="col">
+
+              <i class="fa fa-edit fa-2x"></i>
+                </div>
+                <div class="col">
+
+              <i class="fa fa-trash fa-2x"></i>
+                </div>
+              </div>
+            </div>
           </div>
           <p id="description"></p>
-          <img src="https://via.placeholder.com/700x500.png" />
         </div>
       </div>
     </article>
@@ -44,6 +57,14 @@ export default {
 
           const myDescription = document.getElementById("description");
           myDescription.innerHTML = result.description;
+
+          const myImage = document.createElement("img");
+          // https://via.placeholder.com/700x500.png
+          myImage.setAttribute("src", result.image);
+          myImage.classList.add("img-fluid");
+
+          myDescription.after(myImage)
+
         }).catch()
       })
       .catch(function(err) {

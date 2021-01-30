@@ -93,15 +93,12 @@ export default {
                 })
                 .then(this.$router.push("/").catch(() => {}))
                 .catch(() => {
-                  this.$store.commit(
-                    "SET_ERROR",
-                    "Cet utilisateur n'existe pas"
-                  );
+                  alert("Cet utilisateur n'existe pas");
                 });
             }
           })
           .catch(() => {
-            console.log("Fetch Error!");
+            alert("Un problème est survenu lors de la connexion à la base de données !");
           });
       } else {
         alert("Remplissez chaque champ s'il vous plait");

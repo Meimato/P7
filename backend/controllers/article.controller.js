@@ -7,7 +7,6 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/user.model");
 
 exports.create = (req, res) => {
-  console.log(req.body)
   const title = req.body.title;
   const description = req.body.description;
   const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
@@ -68,8 +67,8 @@ exports.findOne = (req, res) => {
     });
 };
 
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+  
+};
 
 exports.delete = (req, res) => {};
-
-exports.deleteAll = (req, res) => {};

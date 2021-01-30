@@ -2,35 +2,9 @@
   <div class="recent-article">
     <section class="container">
       <div class="row">
-        <h2 class="text-left p-3">Recent Posts</h2>
+        <h2 class="text-left p-3">Publications Récentes</h2>
       </div>
-      <ul id="articles-list" class="row d-flex flex-column p-0">
-        <li class="col card border-light shadow text-left px-3 pt-3">
-          <h2>Title</h2>
-          <p class="lead">
-            Sample text to simulate the description of this article.
-          </p>
-          <img src="https://via.placeholder.com/700x500.png" />
-          <div class="row">
-            <div class="col">
-              <button type="button" class="btn">
-                <i class="fa fa-thumbs-up"> Like</i>
-              </button>
-              <span>TOTAL</span>
-              <button type="button" class="btn">
-                <i class="fa fa-thumbs-down"> Dislike</i>
-              </button>
-            </div>
-            <div class="col text-right">
-              <button type="button" class="btn">
-                <i class="fa fa-edit"> Modify</i>
-              </button>
-              <button type="button" class="btn">
-                <i class="fa fa-trash"> Delete</i>
-              </button>
-            </div>
-          </div>
-        </li>
+      <ul id="articles-list" class="row d-flex flex-column-reverse">
       </ul>
     </section>
   </div>
@@ -60,10 +34,10 @@ export default {
 
               const myListItem = document.createElement("li");
               const myCardLink = document.createElement("article");
-              const targetLink = "/api/article/" + el.id;
+              const targetLink = "./#/api/article/" + el.id;
               
               myCardLink.addEventListener("click", function(){
-                this.$router.push(targetLink);
+                window.location.href = targetLink;
               });
 
               myCardLink.classList.add(
@@ -78,6 +52,8 @@ export default {
                 "btn-outline-dark"
               );
 
+              myCardLink.style.width = "100%"
+
               const myTitle = document.createElement("h2");
               myTitle.innerHTML = el.title;
 
@@ -88,6 +64,7 @@ export default {
               // if el.image not null
               const myImage = document.createElement("img");
               myImage.setAttribute("src", el.image);
+              myImage.classList.add("card-img-bottom");
 
               myList.appendChild(myListItem);
               myListItem.appendChild(myCardLink);
@@ -98,11 +75,11 @@ export default {
             });
           })
           .catch(() => {
-            console.log("An error as occured during articles creation.");
+            alert("An error as occured during articles creation.");
           });
       })
       .catch(() => {
-        console.log("Cannot fetch any article!");
+        alert("Cannot fetch any article!");
       });
   },
 };
