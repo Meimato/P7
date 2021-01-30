@@ -1,19 +1,3 @@
-/**
- * Article model
- *
- * Author REQ
- * Title REQ
- * Description REQ
- * Date REQ
- * Comments NULL [Array Article]
- * Image NULL
- * Link NULL
- * Likes = 0
- * Dislikes = 0
- * UserLikes [Array userIDs]
- * UserDislikes [Array userIDs]
- */
-
 module.exports = (sequelize, Sequelize) => {
   const Article = sequelize.define("Article", {
     title: {
@@ -25,12 +9,9 @@ module.exports = (sequelize, Sequelize) => {
     author: {
       type: Sequelize.STRING,
     },
-    likes: {
-      type: Sequelize.INTEGER,
-    },
-    dislikes: {
-      type: Sequelize.INTEGER,
-    },
+    image: {
+      type: Sequelize.STRING
+    }
   });
 
   return Article;

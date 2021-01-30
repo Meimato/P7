@@ -59,10 +59,12 @@ export default {
               const myList = document.getElementById("articles-list");
 
               const myListItem = document.createElement("li");
-              const myCardLink = document.createElement("router-link");
+              const myCardLink = document.createElement("article");
               const targetLink = "/api/article/" + el.id;
-              myCardLink.setAttribute("to", targetLink);
-              myCardLink.setAttribute("tag", "div");
+              
+              myCardLink.addEventListener("click", function(){
+                this.$router.push(targetLink);
+              });
 
               myCardLink.classList.add(
                 "col",
@@ -85,7 +87,7 @@ export default {
 
               // if el.image not null
               const myImage = document.createElement("img");
-              myImage.setAttribute("src", "https://via.placeholder.com/700x500.png")
+              myImage.setAttribute("src", el.image);
 
               myList.appendChild(myListItem);
               myListItem.appendChild(myCardLink);

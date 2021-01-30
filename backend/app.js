@@ -1,5 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const app = express();
 
@@ -24,6 +25,8 @@ const db = require("./models/index.js");
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
 });
+
+app.use('images', express.static(path.join(__dirname, 'images')))
 
 require("./routes/user.routes.js")(app);
 require("./routes/article.routes.js")(app);

@@ -52,6 +52,9 @@
 <script>
 export default {
   name: "Login",
+  data() {
+    return {};
+  },
   methods: {
     login(event) {
       event.preventDefault();
@@ -76,26 +79,32 @@ export default {
         })
           .then((data) => {
             if (data.status === 401) {
+              alert("Cet utilisateur n'existe pas");
               this.$router.go();
             } else {
               data
                 .json()
-                .then(function(result) {
+                .then((result) => {
                   console.log("You are now logged!");
                   sessionStorage.setItem("key", JSON.stringify(result));
+                  this.$store.commit("SET_USERID", result.userId);
+                  this.$store.commit("SET_TOKEN", result.token);
+                  this.$store.commit("SET_LOGGED", true);
                 })
                 .then(this.$router.push("/").catch(() => {}))
                 .catch(() => {
-                  console.log("Cannot retrieve user!");
+                  this.$store.commit(
+                    "SET_ERROR",
+                    "Cet utilisateur n'existe pas"
+                  );
                 });
             }
           })
-
           .catch(() => {
             console.log("Fetch Error!");
           });
       } else {
-        console.log("vuote");
+        alert("Remplissez chaque champ s'il vous plait");
       }
     },
   },

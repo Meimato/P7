@@ -7,8 +7,10 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../models/user.model");
 
 exports.create = (req, res) => {
+  console.log(req.body)
   const title = req.body.title;
   const description = req.body.description;
+  const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
 
   if (title == "" || description == "") {
     return res.status(400).send({
@@ -22,8 +24,7 @@ exports.create = (req, res) => {
         title: title,
         description: description,
         author: item.username,
-        likes: 0,
-        dislikes: 0,
+        image: image
       };
 
       Article.create(article)

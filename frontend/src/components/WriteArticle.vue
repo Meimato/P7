@@ -1,24 +1,38 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col">
-        <form class="write-article">
-          <input
-            type="text"
-            id="article-title"
-            name="article-title"
-            class="form-control"
-            placeholder="Title"
-            required
-          />
-          <input
-            type="textarea"
-            name="description"
-            id="article-description"
-            class="form-control"
-            placeholder="Description"
-            required
-          />
+      <div class="col-6 mx-auto p-5 text-left">
+        <form id="write-article" class="write-article">
+          <div class="form-group">
+            <label for="article-title">Titre:</label>
+            <input
+              type="text"
+              id="article-title"
+              name="title"
+              class="form-control"
+              placeholder="Commencez par fournir un titre"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="article-description">Description:</label>
+            <textarea
+              name="description"
+              id="article-description"
+              class="form-control"
+              placeholder="Ici, vous pouvez écrire votre article et..."
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="article-image">Partagez une image</label>
+            <input
+              type="file"
+              name="image"
+              id="image"
+              class="form-control-file"
+            />
+          </div>
           <button @click="write" type="button" class="btn btn-primary">
             Publier
           </button>
@@ -42,21 +56,16 @@ export default {
         const myKey = sessionStorage.getItem("key");
         const myParsedKey = JSON.parse(myKey);
 
-        const myArticle = {
-          title: myTitle,
-          description: myDescription,
-          userId: myParsedKey.userId,
-        };
-
+        let myFormData = new FormData(document.getElementById("write-article"));
+        myFormData.append("userId", myParsedKey.userId);
         fetch("http://localhost:3000/api/article/write", {
           method: "POST",
           credentials: "same-origin",
           headers: {
             Accept: "application/json",
-            "Content-type": "application/json",
             Authorization: myKey,
           },
-          body: JSON.stringify(myArticle),
+          body: myFormData
         })
           .then(() => {
             console.log("Article Created!");
