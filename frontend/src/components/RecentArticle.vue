@@ -64,7 +64,7 @@ export default {
               // if el.image not null
               const myImage = document.createElement("img");
               myImage.setAttribute("src", el.image);
-              myImage.classList.add("card-img-bottom");
+              myImage.classList.add("card-img-bottom", "img-fluid");
 
               myList.appendChild(myListItem);
               myListItem.appendChild(myCardLink);

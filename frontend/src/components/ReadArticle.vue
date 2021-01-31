@@ -10,12 +10,10 @@
             <div class="col-2">
               <div class="d-flex flex-row justify-content-start">
                 <div class="col">
-
-              <i class="fa fa-edit fa-2x"></i>
+                  <i class="fa fa-edit fa-2x" @click="edit"></i>
                 </div>
                 <div class="col">
-
-              <i class="fa fa-trash fa-2x"></i>
+                  <i class="fa fa-trash fa-2x" @click="trash"></i>
                 </div>
               </div>
             </div>
@@ -33,10 +31,10 @@ export default {
   data() {
     return {
       article: {
-        title: '',
-        description: '',
-        author: ''
-      }
+        title: "",
+        description: "",
+        author: "",
+      },
     };
   },
   created() {
@@ -50,29 +48,63 @@ export default {
         Authorization: myKey,
       },
     })
-      .then(function(data){
-        data.json().then(function(result){
-          const myTitle = document.getElementById("title");
-          myTitle.innerHTML = result.title;
+      .then(function(data) {
+        data
+          .json()
+          .then(function(result) {
+            const myTitle = document.getElementById("title");
+            myTitle.innerHTML = result.title;
 
-          const myDescription = document.getElementById("description");
-          myDescription.innerHTML = result.description;
+            const myDescription = document.getElementById("description");
+            myDescription.innerHTML = result.description;
 
-          const myImage = document.createElement("img");
-          // https://via.placeholder.com/700x500.png
-          myImage.setAttribute("src", result.image);
-          myImage.classList.add("img-fluid");
+            const myImage = document.createElement("img");
+            myImage.setAttribute("src", result.image);
+            myImage.classList.add("img-fluid");
 
-          myDescription.after(myImage)
-
-        }).catch()
+            myDescription.after(myImage);
+          })
+          .catch();
       })
       .catch(function(err) {
         console.log(err);
       });
   },
+  methods: {
+    edit() {
+      const myKey = sessionStorage.getItem("key");
+      fetch("http://localhost:3000/api/article/" + this.$route.params.id, {
+        method: "PUT",
+        credentials: "same-origin",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: myKey,
+        },
+      })
+        .then()
+        .catch();
+      alert("Pushed EDIT");
+    },
+    trash() {
+      const myKey = sessionStorage.getItem("key");
+      fetch("http://localhost:3000/api/article/" + this.$route.params.id, {
+        method: "DELETE",
+        credentials: "same-origin",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: myKey,
+        },
+      })
+        .then(() => {
+          window.location.href = window.location.hostname;
+        })
+        .catch();
+      alert("Pushed TRASH");
+    },
+  },
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

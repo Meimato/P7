@@ -1,6 +1,7 @@
 const db = require("../models");
 const Article = db.articles;
 const User = db.users;
+const fs = require("fs");
 const Op = db.Sequelize.Op;
 
 const jwt = require("jsonwebtoken");
@@ -9,7 +10,9 @@ const userModel = require("../models/user.model");
 exports.create = (req, res) => {
   const title = req.body.title;
   const description = req.body.description;
-  const image = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+  const image = `${req.protocol}://${req.get("host")}/images/${
+    req.file.filename
+  }`;
 
   if (title == "" || description == "") {
     return res.status(400).send({
@@ -23,7 +26,7 @@ exports.create = (req, res) => {
         title: title,
         description: description,
         author: item.username,
-        image: image
+        image: image,
       };
 
       Article.create(article)
@@ -67,8 +70,22 @@ exports.findOne = (req, res) => {
     });
 };
 
-exports.update = (req, res) => {
-  
-};
+exports.update = (req, res) => {};
 
-exports.delete = (req, res) => {};
+exports.trash = (req, res) => {
+  const myId = req.params.id;
+
+  Article.findByPk(myId)
+    .then((data) => {
+      const filename = data.image.split("/images/")[1];
+      fs.unlink(`images/${filename}`, () => {
+        Article.destroy({
+          where: {
+            id: myId,
+          },
+        })
+          .then(res.status(200).send({ message: "Article delete!" }))
+      });
+    })
+    .catch((error) => res.status(500).json({ error }));
+};
