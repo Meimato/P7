@@ -6,10 +6,10 @@ module.exports = (app) => {
   const auth = require("../middleware/auth.js");
   const multer = require("../middleware/multer-config.js");
 
-  router.post("/write", auth, multer, articles.create);
-  router.get("/", auth, articles.findAll);
-  router.get("/:id", auth, articles.findOne);
-  router.delete("/:id", auth, articles.trash);
+  router.post("/write", auth.verifyToken, multer, articles.create);
+  router.get("/", auth.verifyToken, articles.findAll);
+  router.get("/:id", auth.verifyToken, articles.findOne);
+  router.delete("/:id", auth.verifyToken, articles.trash);
 
   app.use("/api/article", router);
 };

@@ -58,11 +58,12 @@ export default {
             const myDescription = document.getElementById("description");
             myDescription.innerHTML = result.description;
 
-            const myImage = document.createElement("img");
-            myImage.setAttribute("src", result.image);
-            myImage.classList.add("img-fluid");
-
-            myDescription.after(myImage);
+            if (result.image) {
+              const myImage = document.createElement("img");
+              myImage.setAttribute("src", result.image);
+              myImage.classList.add("img-fluid");
+              myDescription.after(myImage);
+            }
           })
           .catch();
       })

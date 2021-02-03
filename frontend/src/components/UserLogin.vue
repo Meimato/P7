@@ -78,7 +78,7 @@ export default {
           body: JSON.stringify(myUserLogin),
         })
           .then((data) => {
-            if (data.status === 401) {
+            if (data.status === 401 || data.status === 404 || data.status === 500) {
               alert("Cet utilisateur n'existe pas");
               this.$router.go();
             } else {

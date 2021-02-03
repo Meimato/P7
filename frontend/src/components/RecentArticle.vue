@@ -4,8 +4,7 @@
       <div class="row">
         <h2 class="text-left p-3">Publications Récentes</h2>
       </div>
-      <ul id="articles-list" class="row d-flex flex-column-reverse">
-      </ul>
+      <ul id="articles-list" class="row d-flex flex-column-reverse"></ul>
     </section>
   </div>
 </template>
@@ -35,8 +34,8 @@ export default {
               const myListItem = document.createElement("li");
               const myCardLink = document.createElement("article");
               const targetLink = "./#/api/article/" + el.id;
-              
-              myCardLink.addEventListener("click", function(){
+
+              myCardLink.addEventListener("click", function() {
                 window.location.href = targetLink;
               });
 
@@ -52,7 +51,7 @@ export default {
                 "btn-outline-dark"
               );
 
-              myCardLink.style.width = "100%"
+              myCardLink.style.width = "100%";
 
               const myTitle = document.createElement("h2");
               myTitle.innerHTML = el.title;
@@ -61,17 +60,16 @@ export default {
               myDescription.classList.add("lead");
               myDescription.textContent = el.description;
 
-              // if el.image not null
-              const myImage = document.createElement("img");
-              myImage.setAttribute("src", el.image);
-              myImage.classList.add("card-img-bottom", "img-fluid");
-
               myList.appendChild(myListItem);
               myListItem.appendChild(myCardLink);
               myCardLink.appendChild(myTitle);
               myCardLink.appendChild(myDescription);
-              myCardLink.appendChild(myImage);
-
+              if (el.image !== null) {
+                const myImage = document.createElement("img");
+                myImage.setAttribute("src", el.image);
+                myImage.classList.add("card-img-bottom", "img-fluid");
+                myCardLink.appendChild(myImage);
+              }
             });
           })
           .catch(() => {

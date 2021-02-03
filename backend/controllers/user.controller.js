@@ -2,7 +2,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const db = require("../models");
-const User = db.users;
+const User = db.user;
+const Role = db.role;
+
+const Op = db.Sequelize.Op;
 
 exports.create = (req, res) => {
   const myUsername = req.body.username;
@@ -20,14 +23,19 @@ exports.create = (req, res) => {
         };
 
         User.create(user)
-          .then((data) => {
-            res.status(201).json({ message: "Utilisateur créé"});
+          .then((user) => {
+              user.setRoles([1]).then(() => {
+                res.status(200).send({ message: "User was registered successfully!" });
+              });
+            
           })
-          .catch((error) =>
-            res.status(400).json({ error: "Ne peut pas créer l'utilisateur" })
-          );
+          .catch((err) => {
+            res.status(500).send({ message: err.message });
+          });
       })
-      .catch((error) => res.status(500).json({ error: "Erreur dans la base de données!" }));
+      .catch((error) =>
+        res.status(500).json({ error: "Erreur dans la base de données!" })
+      );
   } else {
     return res
       .status(401)
@@ -43,7 +51,7 @@ exports.findOne = (req, res) => {
   })
     .then((data) => {
       if (!data) {
-        return res.status(401).json({ error: "Utilisateur non trouvé !" });
+        return res.status(404).json({ error: "Utilisateur non trouvé !" });
       }
       bcrypt
         .compare(req.body.password, data.password)
@@ -51,12 +59,22 @@ exports.findOne = (req, res) => {
           if (!valid) {
             return res.status(401).send({ error: "Mot de passe incorrect !" });
           }
-          res.status(200).json({
-            userId: data.id,
-            token: jwt.sign({ userId: data.id }, "RANDOM_TOKEN_SECRET", {
-              expiresIn: "24h",
-            }),
-          });
+
+          var permissions = [];
+          data.getRoles().then(roles =>{
+            for (let i = 0; i < roles.length; i++) {
+              permissions.push( "ROLE_" + roles[i].name.toUpperCase() );
+            }
+            res.status(200).json({
+              userId: data.id,
+              roles: permissions,
+              token: jwt.sign({ userId: data.id }, "RANDOM_TOKEN_SECRET", {
+                expiresIn: "24h",
+              }),
+            });
+          })
+
+          
         })
         .catch((error) =>
           res.status(500).json({ error: "Erreur dans la base de données !" })
