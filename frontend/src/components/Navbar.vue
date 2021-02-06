@@ -23,29 +23,29 @@
     >
       <ul class="navbar-nav">
          <!-- v-if="!(this.$store.getters.getLogged)" -->
-        <li class="nav-item">
+        <li v-if="!(this.$store.state.isLogged)" class="nav-item">
           <span class="nav-link"
-            ><router-link to="/api/auth/signup">Signup</router-link></span
+            ><router-link to="/signup" tag="span">Signup</router-link></span
           >
         </li>
-        <li class="nav-item">
+        <li v-if="!(this.$store.state.isLogged)"  class="nav-item">
           <span class="nav-link"
-            ><router-link to="/api/auth/login">Login</router-link></span
+            ><router-link to="/login" tag="span">Login</router-link></span
           >
         </li>
-        <li class="nav-item">
+        <li v-if="(this.$store.state.isLogged)" class="nav-item">
           <span class="nav-link"
-            ><router-link to="/api/article/write">Write</router-link></span
+            ><router-link to="/write" tag="span">Write</router-link></span
           >
         </li>
-        <li class="nav-item">
+        <li v-if="(this.$store.state.isLogged)" class="nav-item">
           <span class="nav-link">
-            <router-link to="/api/auth/profile">Profile</router-link>
+            <router-link to="/profile" tag="span">Profile</router-link>
           </span>
         </li>
-        <li class="nav-item">
-          <span class="nav-link">
-            <router-link to="/api/auth/logout">Disconnect</router-link>
+        <li v-if="(this.$store.state.isLogged)" class="nav-item">
+          <span @click="logout" class="nav-link logout">
+            Deconnexion
           </span>
         </li>
       </ul>
@@ -56,20 +56,39 @@
 <script>
 export default {
   name: "Navbar",
+  methods: {
+    logout(){
+      this.$router.push("/login");
+      sessionStorage.removeItem("key");
+      this.$store.commit("SET_USERNAME", "");
+      this.$store.commit("SET_USERID", 0);
+      this.$store.commit("SET_TOKEN", "");
+      this.$store.commit("SET_LOGGED", false);
+      this.$store.commit("SET_ADMIN", false);
+      this.$store.commit("SET_IS_OWNER", false);
+    }
+  }
 };
 </script>
 
 <style scoped>
 .navbar-brand,
-.navbar-brand:visited {
+.navbar-brand:visited,
+.nav-item span:hover  {
   color: #fd2d01;
 }
+
+.nav-item span,
+.navbar-brand:hover {
+  color: #06b15c;
+}
+
 .navbar-brand span {
   text-decoration: none;
 }
 
-.navbar-brand:hover {
+.nav-link, .navbar-brand {
   cursor: pointer;
-  color: #166fe5;
 }
+
 </style>

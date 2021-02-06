@@ -52,9 +52,6 @@
 <script>
 export default {
   name: "Login",
-  data() {
-    return {};
-  },
   methods: {
     login(event) {
       event.preventDefault();
@@ -85,15 +82,20 @@ export default {
               data
                 .json()
                 .then((result) => {
-                  console.log("You are now logged!");
+                  this.$store.commit("SET_USERNAME", result.username);
+                  delete result.username;
                   sessionStorage.setItem("key", JSON.stringify(result));
                   this.$store.commit("SET_USERID", result.userId);
                   this.$store.commit("SET_TOKEN", result.token);
                   this.$store.commit("SET_LOGGED", true);
+                  
+                  if ( result.roles[0] === "ROLE_MODERATOR" ) {
+                    this.$store.commit("SET_ADMIN", true);
+                  }
                 })
                 .then(this.$router.push("/").catch(() => {}))
                 .catch(() => {
-                  alert("Cet utilisateur n'existe pas");
+                  alert("Cet utilisateur n'existe pas ou le mot de passe est erroné");
                 });
             }
           })

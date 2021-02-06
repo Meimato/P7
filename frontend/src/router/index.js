@@ -10,12 +10,12 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/api/auth/login",
+    path: "/login",
     name: "UserLogin",
     component: Login,
   },
   {
-    path: "/api/auth/signup",
+    path: "/signup",
     name: "UserSignup",
     component: Signup,
   },
@@ -28,7 +28,7 @@ const routes = [
     },
   },
   {
-    path: "/api/article/write",
+    path: "/write",
     name: "WriteArticle",
     component: CreateArticle,
     meta: {
@@ -36,13 +36,13 @@ const routes = [
     },
   },
   {
-    path: "/api/article/:id",
+    path: "/article/:id",
     name: "ArticleDetails",
     component: ArticleDetails,
     meta: {
       requiresAuth: true,
     },
-  }
+  },
 ];
 
 const router = new VueRouter({

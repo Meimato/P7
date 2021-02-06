@@ -33,7 +33,7 @@ export default {
 
               const myListItem = document.createElement("li");
               const myCardLink = document.createElement("article");
-              const targetLink = "./#/api/article/" + el.id;
+              const targetLink = "./#/article/" + el.id;
 
               myCardLink.addEventListener("click", function() {
                 window.location.href = targetLink;

@@ -90,14 +90,14 @@ export default {
               data
                 .json()
                 .then()
-                .catch(()=>{console.log("Cannot create the user!")});
+                .catch(()=>{alert("Cannot create the user!")});
 
                 this.$router.push("login");
             }
           })
-          .catch(()=>{console.log("Fetch error!")});
+          .catch(()=>{alert("Fetch error!")});
       } else {
-        console.log("Please, fill each field!");
+        alert("Please, fill each field!");
       }
     },
   },

@@ -66,6 +66,7 @@ exports.findOne = (req, res) => {
               permissions.push( "ROLE_" + roles[i].name.toUpperCase() );
             }
             res.status(200).json({
+              username: data.username,
               userId: data.id,
               roles: permissions,
               token: jwt.sign({ userId: data.id }, "RANDOM_TOKEN_SECRET", {

@@ -78,6 +78,22 @@ function initializeDatabase() {
         .catch();
     })
     .catch();
+
+  bcrypt
+    .hash("fff", 10)
+    .then((hash) => {
+      User.create({
+        id: 3,
+        username: "Foo",
+        email: "foo@bar.com",
+        password: hash,
+      })
+        .then((user) => {
+          user.setRoles([1]);
+        })
+        .catch();
+    })
+    .catch();
 }
 
 app.use("/images", express.static(path.join(__dirname, "images")));

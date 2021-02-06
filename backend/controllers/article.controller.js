@@ -66,10 +66,6 @@ exports.findOne = (req, res) => {
     });
 };
 
-exports.update = (req, res) => {
-
-};
-
 exports.trash = (req, res) => {
   const myId = req.params.id;
 

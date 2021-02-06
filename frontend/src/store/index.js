@@ -3,14 +3,19 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+const store = new Vuex.Store({
   state: {
+    username: "",
     userId: 0,
     token: "",
     isLogged: false,
     isAdmin: false,
+    isOwner: false,
   },
   getters: {
+    getUsername(state) {
+      return `${state.username}`
+    },
     getUserId(state) {
       return `${state.userId}`;
     },
@@ -23,8 +28,14 @@ export default new Vuex.Store({
     getPermissions(state) {
       return `${state.isAdmin}`;
     },
+    getIsOwner(state) {
+      return `${state.isOwner}`;
+    }
   },
   mutations: {
+    SET_USERNAME(state, payload) {
+      state.username = String(payload);
+    },
     SET_USERID(state, payload) {
       state.userId = Number(payload);
     },
@@ -37,7 +48,12 @@ export default new Vuex.Store({
     SET_ADMIN(state, payload) {
       state.isAdmin = Boolean(payload);
     },
+    SET_IS_OWNER(state, payload) {
+      state.isOwner = Boolean(payload);
+    }
   },
   actions: {},
   modules: {},
 });
+
+export default store;

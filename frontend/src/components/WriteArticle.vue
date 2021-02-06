@@ -29,7 +29,7 @@
             <input
               type="file"
               name="image"
-              id="image"
+              id="article-image"
               class="form-control-file"
             />
           </div>
