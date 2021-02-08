@@ -67,6 +67,7 @@ exports.findOne = (req, res) => {
             }
             res.status(200).json({
               username: data.username,
+              email: data.email,
               userId: data.id,
               roles: permissions,
               token: jwt.sign({ userId: data.id }, "RANDOM_TOKEN_SECRET", {
@@ -82,4 +83,27 @@ exports.findOne = (req, res) => {
         );
     })
     .catch((error) => res.status(400).json({ error: "Not found" }));
+};
+
+exports.deleteOne = (req, res) => {
+  const myId = req.body.myUserId;
+  const myPwd = req.body.myUserPassword;
+  User.findByPk(myId)
+    .then((data) => {
+      if (!data) {
+        return res.status(404).json({ error: "Utilisateur non trouvé !" });
+      }
+      bcrypt.compare(myPwd, data.password)
+        .then(
+          
+          User.destroy({
+            where: {
+              id: myId,
+            },
+          }).then(() => {res.status(200).send({ message: "User deleted!"})})
+          
+        )
+        .catch(() => {res.status(500).json({ error: "Erreur mot de passe !" })});
+      
+    })
 };

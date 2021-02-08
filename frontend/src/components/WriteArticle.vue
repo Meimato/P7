@@ -53,18 +53,18 @@ export default {
       const myDescription = myForm["article-description"].value;
 
       if (myTitle !== "" && myDescription !== "") {
-        const myKey = sessionStorage.getItem("key");
-        const myParsedKey = JSON.parse(myKey);
 
         let myFormData = new FormData(document.getElementById("write-article"));
-        myFormData.append("userId", myParsedKey.userId);
+        myFormData.append("userId", this.$store.state.userId);
+
+        let myInfo = {token: this.$store.state.token, userId: this.$store.state.userId};
 
         fetch("http://localhost:3000/api/article/write", {
           method: "POST",
           credentials: "same-origin",
           headers: {
             Accept: "application/json",
-            Authorization: myKey,
+            Authorization: JSON.stringify(myInfo),
           },
           body: myFormData
         })

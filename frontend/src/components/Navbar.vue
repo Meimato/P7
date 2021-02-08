@@ -44,7 +44,7 @@
           </span>
         </li>
         <li v-if="(this.$store.state.isLogged)" class="nav-item">
-          <span @click="logout" class="nav-link logout">
+          <span @click="userLogout" class="nav-link logout">
             Deconnexion
           </span>
         </li>
@@ -54,18 +54,13 @@
 </template>
 
 <script>
+import store from "../store/index.js";
+
 export default {
   name: "Navbar",
   methods: {
-    logout(){
-      this.$router.push("/login");
-      sessionStorage.removeItem("key");
-      this.$store.commit("SET_USERNAME", "");
-      this.$store.commit("SET_USERID", 0);
-      this.$store.commit("SET_TOKEN", "");
-      this.$store.commit("SET_LOGGED", false);
-      this.$store.commit("SET_ADMIN", false);
-      this.$store.commit("SET_IS_OWNER", false);
+    userLogout(){
+      store.dispatch("logout");
     }
   }
 };

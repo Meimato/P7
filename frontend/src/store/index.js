@@ -1,11 +1,13 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "../router/index.js";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
     username: "",
+    email: "",
     userId: 0,
     token: "",
     isLogged: false,
@@ -15,6 +17,9 @@ const store = new Vuex.Store({
   getters: {
     getUsername(state) {
       return `${state.username}`
+    },
+    getUserEmail(state) {
+      return `${state.email}`
     },
     getUserId(state) {
       return `${state.userId}`;
@@ -36,6 +41,9 @@ const store = new Vuex.Store({
     SET_USERNAME(state, payload) {
       state.username = String(payload);
     },
+    SET_USER_EMAIL(state, payload) {
+      state.email = String(payload);
+    },
     SET_USERID(state, payload) {
       state.userId = Number(payload);
     },
@@ -52,7 +60,18 @@ const store = new Vuex.Store({
       state.isOwner = Boolean(payload);
     }
   },
-  actions: {},
+  actions: {
+    logout() {
+      this.commit("SET_USERNAME", "");
+      this.commit("SET_USER_EMAIL", "");
+      this.commit("SET_USERID", 0);
+      this.commit("SET_TOKEN", "");
+      this.commit("SET_LOGGED", false);
+      this.commit("SET_ADMIN", false);
+      this.commit("SET_IS_OWNER", false);
+      router.push("/login");
+    }
+  },
   modules: {},
 });
 

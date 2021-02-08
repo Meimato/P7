@@ -5,6 +5,8 @@ import Signup from "../views/Signup.vue";
 import Main from "../views/Main.vue";
 import CreateArticle from "../views/CreateArticle.vue";
 import ArticleDetails from "../views/ArticleDetails.vue";
+import UserDetails from "../views/UserDetails.vue";
+import Store from "../store/index.js";
 
 Vue.use(VueRouter);
 
@@ -26,6 +28,14 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: UserDetails,
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
     path: "/write",
@@ -51,7 +61,8 @@ const router = new VueRouter({
 
 router.beforeResolve((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (sessionStorage.getItem("key") == null) {
+    console.log(Store.state.token)
+    if (Store.state.token == "") {
       console.log('NO KEY FOUND')
       next({
         name: 'UserLogin'

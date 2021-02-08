@@ -33,15 +33,16 @@ export default {
     };
   },
   created() {
-    const myKey = sessionStorage.getItem("key");
     const myUser = this.$store.state.username;
+    let myInfo = {token: this.$store.state.token, userId: this.$store.state.userId};
+
     fetch("http://localhost:3000/api/article/" + this.$route.params.id, {
       method: "GET",
       credentials: "same-origin",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: myKey,
+        Authorization: JSON.stringify(myInfo),
       },
     })
       .then(function(data) {
@@ -82,14 +83,15 @@ export default {
   },
   methods: {
     trash() {
-      const myKey = sessionStorage.getItem("key");
+      let myInfo = {token: this.$store.state.token, userId: this.$store.state.userId};
+
       fetch("http://localhost:3000/api/article/" + this.$route.params.id, {
         method: "DELETE",
         credentials: "same-origin",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          Authorization: myKey,
+          Authorization: JSON.stringify(myInfo),
         },
       })
         .then(() => {

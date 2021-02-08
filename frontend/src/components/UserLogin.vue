@@ -1,11 +1,11 @@
 <template>
-  <div class="container d-flex flex-column justify-content-md-center">
+  <section class="container d-flex flex-column justify-content-md-center">
     <div class="row">
-      <section class="col-12 col-md-5 offset-md-1 my-5">
+      <div class="col-12 col-md-5 offset-md-1 my-5">
         <h1 class="font-weight-bold">Groupomania</h1>
         <h2 class="lead">Partagez et restez en contact avec votre equipe.</h2>
-      </section>
-      <section class="col-12 col-md-4 offset-md-1 card rounded-corners shadow">
+      </div>
+      <div class="col-12 col-md-4 offset-md-1 card rounded-corners shadow">
         <form class="form-group">
           <input
             type="email"
@@ -44,16 +44,21 @@
             </button></router-link
           >
         </form>
-      </section>
+      </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>
 export default {
   name: "Login",
+  created() {
+    if (this.$store.state.getLogged === true) {
+      this.$route.push("/");
+    }
+  },
   methods: {
-    login(event) {
+    async login(event) {
       event.preventDefault();
       const myForm = document.querySelector("form");
       const myUserMail = myForm["user-mail"].value;
@@ -65,7 +70,7 @@ export default {
           password: myUserPassword,
         };
 
-        fetch("http://localhost:3000/api/auth/login", {
+        const data = await fetch("http://localhost:3000/api/auth/login", {
           method: "POST",
           credentials: "same-origin",
           headers: {
@@ -73,35 +78,35 @@ export default {
             "Content-Type": "application/json",
           },
           body: JSON.stringify(myUserLogin),
-        })
-          .then((data) => {
-            if (data.status === 401 || data.status === 404 || data.status === 500) {
-              alert("Cet utilisateur n'existe pas");
-              this.$router.go();
-            } else {
-              data
-                .json()
-                .then((result) => {
-                  this.$store.commit("SET_USERNAME", result.username);
-                  delete result.username;
-                  sessionStorage.setItem("key", JSON.stringify(result));
-                  this.$store.commit("SET_USERID", result.userId);
-                  this.$store.commit("SET_TOKEN", result.token);
-                  this.$store.commit("SET_LOGGED", true);
-                  
-                  if ( result.roles[0] === "ROLE_MODERATOR" ) {
-                    this.$store.commit("SET_ADMIN", true);
-                  }
-                })
-                .then(this.$router.push("/").catch(() => {}))
-                .catch(() => {
-                  alert("Cet utilisateur n'existe pas ou le mot de passe est erroné");
-                });
-            }
-          })
-          .catch(() => {
-            alert("Un problème est survenu lors de la connexion à la base de données !");
-          });
+        });
+        console.log(data);
+        if (data.status === 401 || data.status === 404 || data.status === 500) {
+          alert("Cet utilisateur n'existe pas ou le mot de passe est erroné");
+          this.$router.go();
+        } else {
+          data
+            .json()
+            .then((result) => {
+              console.log("I'M HERE!")
+              this.$store.commit("SET_USERNAME", result.username);
+              delete result.username;
+              this.$store.commit("SET_USER_EMAIL", result.email);
+              delete result.email;
+              this.$store.commit("SET_USERID", result.userId);
+              this.$store.commit("SET_TOKEN", result.token);
+              this.$store.commit("SET_LOGGED", true);
+
+              if (result.roles[0] === "ROLE_MODERATOR") {
+                this.$store.commit("SET_ADMIN", true);
+              }
+            })
+            .then(this.$router.push("/").catch(() => {}))
+            .catch(() => {
+              alert(
+                "Cet utilisateur n'existe pas ou le mot de passe est erroné"
+              );
+            });
+        }
       } else {
         alert("Remplissez chaque champ s'il vous plait");
       }

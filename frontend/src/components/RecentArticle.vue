@@ -13,7 +13,7 @@
 export default {
   name: "RecentArticle",
   mounted() {
-    const myKey = sessionStorage.getItem("key");
+    let myInfo = {token: this.$store.state.token, userId: this.$store.state.userId};
 
     fetch("http://localhost:3000/api/article", {
       method: "GET",
@@ -21,9 +21,10 @@ export default {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        Authorization: myKey,
+        Authorization: JSON.stringify(myInfo)
+        }
       },
-    })
+    )
       .then((data) => {
         data
           .json()
