@@ -7,6 +7,7 @@
       </div>
       <div class="col-12 col-md-4 offset-md-1 card rounded-corners shadow">
         <form class="form-group">
+          <label for="user-mail" class="sr-only">E-mail</label>
           <input
             type="email"
             name="user-mail"
@@ -15,6 +16,7 @@
             class="form-control col rounded-corners my-3 py-3"
             required
           />
+          <label for="user-password" class="sr-only">Mot de passe</label>
           <input
             type="password"
             name="user-password"

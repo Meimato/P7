@@ -10,7 +10,8 @@
               <h1 class="card-title">S'inscrire</h1>
               <h2 class="card-text lead pb-4">C’est rapide et facile.</h2>
             </section>
-            <section class="bottom">
+            <section class="bottom text-left">
+              <label for="user-name" class="sr-only">Nom utilisateur</label>
               <input
                 type="text"
                 name="user-name"
@@ -19,6 +20,7 @@
                 class="form-control col rounded-corners my-3"
                 required
               />
+              <label for="user-email" class="sr-only">E-mail</label>
               <input
                 type="email"
                 name="user-email"
@@ -27,14 +29,18 @@
                 class="form-control col rounded-corners my-3"
                 required
               />
+              <label for="user-password" class="sr-only">Mot de passe</label>
               <input
                 type="password"
                 name="user-password"
                 id="user-password"
                 class="form-control col rounded-corners mb-3"
-                placeholder="Nouveau mot de passe"
+                placeholder="Mot de passe"
                 required
               />
+              <p class="small form-text">
+                Nous ne partagerons jamais votre email avec quelqu'un d'autre.
+              </p>
               <p class="small">
                 En cliquant sur S’inscrire, vous acceptez nos Conditions
                 générales. Vous recevrez peut-être des notifications par texto

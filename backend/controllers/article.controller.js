@@ -1,6 +1,8 @@
 const db = require("../models");
 const Article = db.article;
 const User = db.user;
+
+const Op = db.Sequelize.Op;
 const fs = require("fs");
 
 exports.create = (req, res) => {
@@ -41,7 +43,9 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-  Article.findAll()
+  const title = req.query.title;
+  var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  Article.findAll({ where: condition })
     .then((data) => {
       res.status(201).send(data);
     })
