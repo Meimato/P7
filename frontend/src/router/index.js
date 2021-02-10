@@ -6,6 +6,7 @@ import Main from "../views/Main.vue";
 import CreateArticle from "../views/CreateArticle.vue";
 import ArticleDetails from "../views/ArticleDetails.vue";
 import UserDetails from "../views/UserDetails.vue";
+import SearchDetails from "../views/SearchDetails.vue";
 import Store from "../store/index.js";
 
 Vue.use(VueRouter);
@@ -44,6 +45,14 @@ const routes = [
     meta: {
       requiresAuth: true,
     },
+  },
+  {
+    path: "/search",
+    name: "SearchDetails",
+    component: SearchDetails,
+    meta: {
+      requiresAuth: true,
+    }
   },
   {
     path: "/article/:id",
