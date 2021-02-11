@@ -21,13 +21,13 @@ exports.create = (req, res) => {
           email: myEmail,
           password: hash,
         };
-
         User.create(user)
           .then((user) => {
-              user.setRoles([1]).then(() => {
-                res.status(200).send({ message: "User was registered successfully!" });
-              });
-            
+            user.setRoles([1]).then(() => {
+              res
+                .status(200)
+                .send({ message: "User was registered successfully!" });
+            });
           })
           .catch((err) => {
             res.status(500).send({ message: err.message });
@@ -59,11 +59,10 @@ exports.findOne = (req, res) => {
           if (!valid) {
             return res.status(401).send({ error: "Mot de passe incorrect !" });
           }
-
           var permissions = [];
-          data.getRoles().then(roles =>{
+          data.getRoles().then((roles) => {
             for (let i = 0; i < roles.length; i++) {
-              permissions.push( "ROLE_" + roles[i].name.toUpperCase() );
+              permissions.push("ROLE_" + roles[i].name.toUpperCase());
             }
             res.status(200).json({
               username: data.username,
@@ -74,9 +73,7 @@ exports.findOne = (req, res) => {
                 expiresIn: "24h",
               }),
             });
-          })
-
-          
+          });
         })
         .catch((error) =>
           res.status(500).json({ error: "Erreur dans la base de données !" })
@@ -88,22 +85,26 @@ exports.findOne = (req, res) => {
 exports.deleteOne = (req, res) => {
   const myId = req.body.myUserId;
   const myPwd = req.body.myUserPassword;
-  User.findByPk(myId)
-    .then((data) => {
-      if (!data) {
-        return res.status(404).json({ error: "Utilisateur non trouvé !" });
-      }
-      bcrypt.compare(myPwd, data.password)
-        .then(
-          
-          User.destroy({
-            where: {
-              id: myId,
-            },
-          }).then(() => {res.status(200).send({ message: "User deleted!"})})
-          
-        )
-        .catch(() => {res.status(500).json({ error: "Erreur mot de passe !" })});
-      
-    })
+  User.findByPk(myId).then((data) => {
+    if (!data) {
+      return res.status(404).json({ error: "Utilisateur non trouvé !" });
+    }
+    bcrypt
+      .compare(myPwd, data.password)
+      .then((valid) => {
+        if (!valid) {
+          return res.status(401).send({ error: "Mot de passe incorrect !" });
+        }
+        User.destroy({
+          where: {
+            id: myId,
+          },
+        }).then(() => {
+          res.status(200).send({ message: "User deleted!" });
+        });
+      })
+      .catch(() => {
+        res.status(500).json({ error: "Erreur mot de passe !" });
+      });
+  });
 };

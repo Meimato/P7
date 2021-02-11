@@ -17,7 +17,7 @@
                 name="user-name"
                 id="user-name"
                 placeholder="Nom utilisateur"
-                class="form-control col rounded-corners my-3"
+                class="form-control col rounded-corners my-3 p-4"
                 required
               />
               <label for="user-email" class="sr-only">E-mail</label>
@@ -26,7 +26,7 @@
                 name="user-email"
                 id="user-email"
                 placeholder="E-mail"
-                class="form-control col rounded-corners my-3"
+                class="form-control col rounded-corners my-3 p-4"
                 required
               />
               <label for="user-password" class="sr-only">Mot de passe</label>
@@ -34,7 +34,7 @@
                 type="password"
                 name="user-password"
                 id="user-password"
-                class="form-control col rounded-corners mb-3"
+                class="form-control col rounded-corners mb-3 p-4"
                 placeholder="Mot de passe"
                 required
               />
@@ -50,7 +50,7 @@
                 type="submit"
                 @click="signup"
                 id="btn-signup"
-                class="btn btn-success btn-block rounded-corners text-white"
+                class="btn btn-success btn-block rounded-corners text-white p-3"
               >
                 S'inscrire
               </button>

@@ -1,7 +1,7 @@
 <template>
   <section class="container d-flex flex-column justify-content-md-center">
     <div class="row">
-      <div class="col-12 col-md-5 offset-md-1 my-5">
+      <div class="col-12 col-md-5 offset-md-1 my-5 text-left">
         <h1 class="font-weight-bold">Groupomania</h1>
         <h2 class="lead">Partagez et restez en contact avec votre equipe.</h2>
       </div>
@@ -13,7 +13,7 @@
             name="user-mail"
             id="user-mail"
             placeholder="E-mail"
-            class="form-control col rounded-corners my-3 py-3"
+            class="form-control col rounded-corners my-3 p-4"
             required
           />
           <label for="user-password" class="sr-only">Mot de passe</label>
@@ -21,7 +21,7 @@
             type="password"
             name="user-password"
             id="user-password"
-            class="form-control col rounded-corners mb-3 py-3"
+            class="form-control col rounded-corners mb-3 p-4"
             placeholder="Mot de passe"
             required
           />
@@ -54,11 +54,6 @@
 <script>
 export default {
   name: "Login",
-  created() {
-    if (this.$store.state.getLogged === true) {
-      this.$route.push("/");
-    }
-  },
   methods: {
     async login(event) {
       event.preventDefault();
