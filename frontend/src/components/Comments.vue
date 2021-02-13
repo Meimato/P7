@@ -22,9 +22,9 @@
         </div>
       </div>
     </div>
-    <div class="container card border-light shadow text-left p-3 mb-5">
+    <div id="comment-panel" class="container card border-light shadow text-left px-3 pt-3 pb-0 mb-5">
       <div class="row">
-        <ul id="comment-section" class="col"></ul>
+        <ul id="comment-section" class="col m-0"></ul>
       </div>
     </div>
   </div>
@@ -82,6 +82,10 @@ export default {
           data
             .json()
             .then((result) => {
+              if (result.length === 0) {
+                const myCommentPanel = document.getElementById("comment-panel");
+                myCommentPanel.remove();
+              } else {
               result.forEach((el) => {
                 const myList = document.getElementById("comment-section");
 
@@ -118,6 +122,8 @@ export default {
                 myListItem.appendChild(myAuthor);
                 myListItem.appendChild(myDescription);
               });
+
+              }
             })
             .catch(() => {
               alert("An error as occured during comment creation.");
