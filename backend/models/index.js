@@ -21,6 +21,7 @@ db.sequelize = sequelize;
 db.article = require("./article.model.js")(sequelize, Sequelize);
 db.user = require("./user.model.js")(sequelize, Sequelize);
 db.role = require("./role.model.js")(sequelize, Sequelize);
+db.comment = require("./comment.model.js")(sequelize, Sequelize);
 
 db.role.belongsToMany(db.user, {
   through: "user_roles",
@@ -34,5 +35,15 @@ db.user.belongsToMany(db.role, {
 });
 
 db.ROLES = ["user", "moderator"];
+
+db.article.hasMany(db.comment, {
+  as: "comment",
+});
+
+db.comment.belongsTo(db.article, {
+  through: "comments",
+  foreignKey: "ArticleId",
+  as: "article"
+});
 
 module.exports = db;

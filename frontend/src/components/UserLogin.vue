@@ -1,11 +1,12 @@
 <template>
-  <section class="container d-flex flex-column justify-content-md-center">
+  <section class="container-fluid d-flex flex-column justify-content-md-center">
+    <div class="overlay"></div>
     <div class="row">
-      <div class="col-12 col-md-5 offset-md-1 my-5 text-left">
+      <div class="col-12 col-md-5 offset-md-2 my-5 text-left">
         <h1 class="font-weight-bold">Groupomania</h1>
-        <h2 class="lead">Partagez et restez en contact avec votre equipe.</h2>
+        <h2 class="lead text-white">Partagez et restez en contact avec votre equipe.</h2>
       </div>
-      <div class="col-12 col-md-4 offset-md-1 card rounded-corners shadow">
+      <div class="col-12 col-md-4 card rounded-corners shadow">
         <form class="form-group">
           <label for="user-mail" class="sr-only">E-mail</label>
           <input
@@ -36,7 +37,7 @@
             Connexion
           </button>
           <hr />
-          <router-link to="/api/auth/signup"
+          <router-link to="/signup"
             ><button
               type="button"
               id="btn-signup"
@@ -113,9 +114,23 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  height: 70vh;
+.overlay {
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0;
+  right: 0;
+  z-index: 0;
+}
+
+.container-fluid {
+  height: 90vh;
   background-color: #f0f2f5;
+  opacity: 1;
+  position: relative;
+  background-image: url("../assets/1.jpg");
+  background-size: cover;
 }
 
 h1 {

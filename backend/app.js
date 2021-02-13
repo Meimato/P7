@@ -100,5 +100,6 @@ app.use("/images", express.static(path.join(__dirname, "images")));
 
 require("./routes/user.routes.js")(app);
 require("./routes/article.routes.js")(app);
+require("./routes/comment.routes.js")(app);
 
 module.exports = app;

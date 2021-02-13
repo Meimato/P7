@@ -22,7 +22,6 @@
       class="collapse navbar-collapse justify-content-end"
     >
       <ul class="navbar-nav">
-         <!-- v-if="!(this.$store.getters.getLogged)" -->
         <li v-if="!(this.$store.state.isLogged)" class="nav-item">
           <span class="nav-link"
             ><router-link to="/signup" tag="span">Signup</router-link></span
@@ -67,6 +66,10 @@ export default {
 </script>
 
 <style scoped>
+nav {
+  border-bottom: 0.2rem solid #FFD7D7;
+}
+
 .navbar-brand,
 .navbar-brand:visited,
 .nav-item span:hover  {
