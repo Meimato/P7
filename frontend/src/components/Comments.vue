@@ -51,8 +51,6 @@ export default {
       };
 
       function trash(commentId) {
-        console.log( "Comment #" + commentId + " TRASHED!");
-
         fetch("http://localhost:3000/api/comment/delete/" + commentId, {
           method: "DELETE",
           credentials: "same-origin",
@@ -111,7 +109,7 @@ export default {
 
                 myAuthor.innerHTML = el.author;
 
-                if (el.author === this.$store.state.username) {
+                if (el.author === this.$store.state.username || this.$store.state.isAdmin) {
                   myAuthor.innerHTML = '<i class="fa fa-trash fa-2x btn"></i>' + el.author;
                   myAuthor.addEventListener('click', function(){
                     trash(el.id);
@@ -156,7 +154,6 @@ export default {
         body: JSON.stringify(myComment),
       })
         .then(() => {
-          console.log("Comment Created!");
           this.$router.push("/");
         })
         .catch(() => {

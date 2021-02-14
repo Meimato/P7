@@ -69,7 +69,6 @@ export default {
           body: myFormData
         })
           .then(() => {
-            console.log("Article Created!");
             this.$router.push("/");
           })
           .catch(() => {

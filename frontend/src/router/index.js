@@ -70,9 +70,7 @@ const router = new VueRouter({
 
 router.beforeResolve((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    console.log(Store.state.token)
     if (Store.state.token == "") {
-      console.log('NO KEY FOUND')
       next({
         name: 'UserLogin'
       });

@@ -61,6 +61,16 @@ const store = new Vuex.Store({
     }
   },
   actions: {
+    login({commit}, info) {
+      commit("SET_USERNAME", info.username);
+      commit("SET_USER_EMAIL", info.email);
+      commit("SET_USERID", info.userid);
+      commit("SET_TOKEN", info.token);
+      commit("SET_LOGGED", true);
+      commit("SET_ADMIN", info.isAdmin);
+      commit("SET_IS_OWNER", false);
+      router.push("/");
+    },
     logout() {
       this.commit("SET_USERNAME", "");
       this.commit("SET_USER_EMAIL", "");

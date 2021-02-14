@@ -4,7 +4,9 @@
     <div class="row">
       <div class="col-12 col-md-5 offset-md-2 my-5 text-left">
         <h1 class="font-weight-bold">Groupomania</h1>
-        <h2 class="lead text-white">Partagez et restez en contact avec votre equipe.</h2>
+        <h2 class="lead text-white">
+          Partagez et restez en contact avec votre equipe.
+        </h2>
       </div>
       <div class="col-12 col-md-4 card rounded-corners shadow">
         <form class="form-group">
@@ -53,6 +55,8 @@
 </template>
 
 <script>
+import Store from "../store/index.js";
+
 export default {
   name: "Login",
   methods: {
@@ -77,7 +81,6 @@ export default {
           },
           body: JSON.stringify(myUserLogin),
         });
-        console.log(data);
         if (data.status === 401 || data.status === 404 || data.status === 500) {
           alert("Cet utilisateur n'existe pas ou le mot de passe est erroné");
           this.$router.go();
@@ -85,20 +88,19 @@ export default {
           data
             .json()
             .then((result) => {
-              console.log("I'M HERE!")
-              this.$store.commit("SET_USERNAME", result.username);
-              delete result.username;
-              this.$store.commit("SET_USER_EMAIL", result.email);
-              delete result.email;
-              this.$store.commit("SET_USERID", result.userId);
-              this.$store.commit("SET_TOKEN", result.token);
-              this.$store.commit("SET_LOGGED", true);
-
+              let adminPerm = false;
               if (result.roles[0] === "ROLE_MODERATOR") {
-                this.$store.commit("SET_ADMIN", true);
+                adminPerm = true;
               }
+              const myInfos = {
+                "isAdmin": adminPerm,
+                "username": result.username,
+                "email": result.email,
+                "userid": result.userId,
+                "token": result.token,
+              };
+              Store.dispatch("login", myInfos);
             })
-            .then(this.$router.push("/").catch(() => {}))
             .catch(() => {
               alert(
                 "Cet utilisateur n'existe pas ou le mot de passe est erroné"
