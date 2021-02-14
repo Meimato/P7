@@ -24,27 +24,27 @@
       <ul class="navbar-nav">
         <li v-if="!(this.$store.state.isLogged)" class="nav-item">
           <span class="nav-link"
-            ><router-link to="/signup" tag="span">Signup</router-link></span
+            ><router-link to="/signup" tag="span">Inscription</router-link></span
           >
         </li>
         <li v-if="!(this.$store.state.isLogged)"  class="nav-item">
           <span class="nav-link"
-            ><router-link to="/login" tag="span">Login</router-link></span
+            ><router-link to="/login" tag="span">Connexion</router-link></span
           >
         </li>
         <li v-if="(this.$store.state.isLogged)" class="nav-item">
           <span class="nav-link"
-            ><router-link to="/write" tag="span">Write</router-link></span
+            ><router-link to="/write" tag="span">Ecrire</router-link></span
           >
         </li>
         <li v-if="(this.$store.state.isLogged)" class="nav-item">
           <span class="nav-link">
-            <router-link to="/profile" tag="span">Profile</router-link>
+            <router-link to="/profile" tag="span">Profil</router-link>
           </span>
         </li>
         <li v-if="(this.$store.state.isLogged)" class="nav-item">
           <span @click="userLogout" class="nav-link logout">
-            Deconnexion
+            Déconnexion
           </span>
         </li>
       </ul>

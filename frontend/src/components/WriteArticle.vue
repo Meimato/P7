@@ -4,7 +4,7 @@
       <div class="col-12 col-md-6 mx-auto p-5 text-left">
         <form id="write-article" class="write-article">
           <div class="form-group">
-            <label for="article-title">Titre:</label>
+            <label for="article-title">Titre</label>
             <input
               type="text"
               id="article-title"
@@ -15,17 +15,17 @@
             />
           </div>
           <div class="form-group">
-            <label for="article-description">Description:</label>
+            <label for="article-description">Description</label>
             <textarea
               name="description"
               id="article-description"
               class="form-control"
-              placeholder="Ici, vous pouvez écrire votre article et..."
+              placeholder="Ici, vous pouvez écrire votre article et aussi..."
               required
             />
           </div>
           <div class="form-group">
-            <label for="article-image">Partagez une image</label>
+            <label for="article-image">Partager une image</label>
             <input
               type="file"
               name="image"

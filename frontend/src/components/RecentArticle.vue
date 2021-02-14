@@ -10,14 +10,14 @@
             <div class="form-group row align-items-center pt-3">
               <div class="col-12 col-md-9">
                 <label for="title" class="sr-only"
-                  >Recherche dans un titre seulement.</label
+                  >Recherche par titre</label
                 >
                 <input
                   type="text"
                   name="title"
                   id="title"
                   class="form-control"
-                  placeholder="Recherche dans un titre seulement"
+                  placeholder="Recherche par titre"
                   v-model="searchByTitle"
                 />
               </div>
@@ -27,7 +27,7 @@
                   class="btn btn-link"
                   @click.prevent="searchArticles"
                 >
-                  Chercher an article
+                  Chercher un article
                 </button>
               </div>
             </div>

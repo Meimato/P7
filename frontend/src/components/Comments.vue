@@ -5,13 +5,13 @@
         <div class="col">
           <form id="write-comment">
             <div class="form-group">
-              <label for="comment" class="sr-only">Ecrire un commentaire</label>
+              <label for="comment" class="sr-only">Ecrivez un commentaire</label>
               <textarea
                 v-model="userComment"
                 name="textComment"
                 id="textComment"
                 class="form-control row-3"
-                placeholder="Ecrire un commentaire"
+                placeholder="Ecrivez un commentaire"
                 required
               />
             </div>

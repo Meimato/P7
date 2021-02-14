@@ -34,12 +34,12 @@ exports.create = (req, res) => {
           });
       })
       .catch((error) =>
-        res.status(500).json({ error: "Erreur dans la base de données!" })
+        res.status(500).json({ error: "Database error!" })
       );
   } else {
     return res
       .status(401)
-      .json({ error: "Remplissez chaque champ s'il vous plait" });
+      .json({ error: "Please fill each field" });
   }
 };
 
@@ -51,13 +51,13 @@ exports.findOne = (req, res) => {
   })
     .then((data) => {
       if (!data) {
-        return res.status(404).json({ error: "Utilisateur non trouvé !" });
+        return res.status(404).json({ error: "User not found!" });
       }
       bcrypt
         .compare(req.body.password, data.password)
         .then((valid) => {
           if (!valid) {
-            return res.status(401).send({ error: "Mot de passe incorrect !" });
+            return res.status(401).send({ error: "Wrong password!" });
           }
           var permissions = [];
           data.getRoles().then((roles) => {
@@ -76,7 +76,7 @@ exports.findOne = (req, res) => {
           });
         })
         .catch((error) =>
-          res.status(500).json({ error: "Erreur dans la base de données !" })
+          res.status(500).json({ error: "Database error!" })
         );
     })
     .catch((error) => res.status(400).json({ error: "Not found" }));
@@ -87,13 +87,13 @@ exports.deleteOne = (req, res) => {
   const myPwd = req.body.myUserPassword;
   User.findByPk(myId).then((data) => {
     if (!data) {
-      return res.status(404).json({ error: "Utilisateur non trouvé !" });
+      return res.status(404).json({ error: "User not found!" });
     }
     bcrypt
       .compare(myPwd, data.password)
       .then((valid) => {
         if (!valid) {
-          return res.status(401).send({ error: "Mot de passe incorrect !" });
+          return res.status(401).send({ error: "Wrong password!" });
         }
         User.destroy({
           where: {
@@ -104,7 +104,7 @@ exports.deleteOne = (req, res) => {
         });
       })
       .catch(() => {
-        res.status(500).json({ error: "Erreur mot de passe !" });
+        res.status(500).json({ error: "Wrong password!" });
       });
   });
 };

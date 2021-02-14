@@ -9,18 +9,18 @@
       </div>
       <div class="row">
         <div class="col">
-          <strong>Email: </strong>{{ this.$store.getters.getUserEmail }}
+          <strong>E-mail: </strong>{{ this.$store.getters.getUserEmail }}
         </div>
       </div>
       <div v-if="this.$store.state.isAdmin" class="row">
-        <div class="col"><strong>Role: </strong>Moderator</div>
+        <div class="col"><strong>Rôle: </strong>Modérateur</div>
       </div>
       <div v-else class="row">
-        <div class="col"><strong>Role: </strong>User</div>
+        <div class="col"><strong>Rôle: </strong>Utilisateur</div>
       </div>
       <div class="row">
         <div class="col">
-          <strong>UserId: </strong>{{ this.$store.getters.getUserId }}
+          <strong>ID Utilisateur #: </strong>{{ this.$store.getters.getUserId }}
         </div>
       </div>
     </div>
