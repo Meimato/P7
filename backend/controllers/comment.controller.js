@@ -43,7 +43,7 @@ exports.trashComment = (req, res) => {
       id: req.params.id
     }
   })
-  .then(res.status(200).send({ message: "Article delete!" }))
+  .then(res.status(200).send({ message: "Comment deleted!" }))
   .catch((err) => res.status(500).send({ message: "Database Error: Cannot delete comment."}));
 
 };

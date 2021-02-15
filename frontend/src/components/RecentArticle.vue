@@ -101,19 +101,9 @@ export default {
                 const myTitle = document.createElement("h2");
                 myTitle.innerHTML = el.title;
 
-                const myDescription = document.createElement("p");
-                myDescription.textContent = el.description;
-
                 myList.appendChild(myListItem);
                 myListItem.appendChild(myCardLink);
                 myCardLink.appendChild(myTitle);
-                myCardLink.appendChild(myDescription);
-                if (el.image !== null) {
-                  const myImage = document.createElement("img");
-                  myImage.setAttribute("src", el.image);
-                  myImage.classList.add("card-img-bottom", "img-fluid");
-                  myCardLink.appendChild(myImage);
-                }
               });
             })
             .catch(() => {
@@ -132,8 +122,7 @@ export default {
 </script>
 
 <style scoped>
-ul#articles-list,
-ul#search-list {
+ul#articles-list {
   list-style-type: none;
 }
 
