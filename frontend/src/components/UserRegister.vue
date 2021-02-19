@@ -1,6 +1,6 @@
 <template>
   <section
-    class="container d-flex flex-column align-items-center justify-content-center my-5"
+    class="container-fluid d-flex flex-column align-items-center justify-content-center"
   >
     <div class="row">
       <div class="col col-md-6 mx-auto">
