@@ -18,11 +18,6 @@
       <div v-else class="row">
         <div class="col"><strong>Rôle: </strong>Utilisateur</div>
       </div>
-      <div class="row">
-        <div class="col">
-          <strong>ID Utilisateur #: </strong>{{ this.$store.getters.getUserId }}
-        </div>
-      </div>
     </div>
     <button @click="showPanel" class="btn btn-warning mb-3">
       Supprimer votre compte
