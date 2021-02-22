@@ -3,9 +3,16 @@ const jwt = require("jsonwebtoken");
 
 const db = require("../models");
 const User = db.user;
-const Role = db.role;
 
-const Op = db.Sequelize.Op;
+/**
+ * Encrypts the user's password, adds the user to the database
+ * 
+ * @param {Object} req - The HTTP request to register the user's account
+ * @param {string} req.body.username - The username
+ * @param {string} req.body.email - The user's email
+ * @param {string} req.body.password - The user password
+ * @param {Object} res - The HTTP response
+ */
 
 exports.create = (req, res) => {
   const myUsername = req.body.username;
@@ -29,12 +36,12 @@ exports.create = (req, res) => {
                 .send({ message: "User was registered successfully!" });
             });
           })
-          .catch((err) => {
-            res.status(500).send({ message: err.message });
+          .catch(() => {
+            res.status(404).send({ error: "Database error!" });
           });
       })
-      .catch((error) =>
-        res.status(500).json({ error: "Database error!" })
+      .catch(() =>
+        res.status(500).json({ error: "Error during encryption!" })
       );
   } else {
     return res
@@ -42,6 +49,24 @@ exports.create = (req, res) => {
       .json({ error: "Please fill each field" });
   }
 };
+
+/**
+ * Verifies user's credentials,
+ * returning the user's identifier from the database data and the associated authentication token 
+ *
+ * @param {Object} req - The HTTP request to login using user's credentials
+ * @param {string} req.body.email - The user's email
+ * @param {string} req.body.password - The user password
+ * @param {Object} res - The HTTP response
+ * 
+ * @returns {Object} User - The informations about the user
+ * @returns {string} User.username - The username
+ * @returns {string} User.email - The user email
+ * @returns {number} User.userId - The user identification number
+ * @returns {Array} User.roles - The roles assigned to the user
+ * @returns {string} User.token - The authentication token
+ * 
+ */
 
 exports.findOne = (req, res) => {
   User.findOne({
@@ -75,12 +100,21 @@ exports.findOne = (req, res) => {
             });
           });
         })
-        .catch((error) =>
-          res.status(500).json({ error: "Database error!" })
+        .catch(() => res.status(404).json({ error: "Error during comparison!" })
         );
     })
-    .catch((error) => res.status(400).json({ error: "Not found" }));
+    .catch(() => res.status(500).json({ error: "Database error!" }));
 };
+
+/**
+ * Removes the user with the provided ID
+ * 
+ * @param {Object} req - The HTTP request to delete the user
+ * @param {String} req.body.myUserId - User's ID
+ * @param {String} req.body.myUserPassword - User's password
+ * @param {Object} res - The HTTP response
+ * 
+ */
 
 exports.deleteOne = (req, res) => {
   const myId = req.body.myUserId;
@@ -104,7 +138,7 @@ exports.deleteOne = (req, res) => {
         });
       })
       .catch(() => {
-        res.status(500).json({ error: "Wrong password!" });
+        res.status(500).json({ error: "Error during comparison!" });
       });
   });
 };

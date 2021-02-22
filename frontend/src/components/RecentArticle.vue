@@ -3,7 +3,7 @@
     <section class="container">
       <div class="row align-items-center">
         <div class="col-12 col-md-6">
-          <h2 class="text-left p-3">Publications Récentes</h2>
+          <h1 class="text-left p-3">Publications Récentes</h1>
         </div>
         <div class="col-12 col-md-6">
           <form>

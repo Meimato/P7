@@ -1,6 +1,16 @@
 const db = require("../models");
 const User = db.user;
 
+/**
+ * Checks if the user name or email has already been registered
+ * 
+ * @param {Object} req - The HTTP request
+ * @param {string} req.body.username - The username
+ * @param {string} req.body.email - The user mail
+ * @param {Object} res - The HTTP response
+ * @param {Object} next - The next function
+ */
+
 module.exports = (req, res, next) => {
   User.findOne({
     where: {

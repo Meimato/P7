@@ -2,6 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-12 col-md-6 mx-auto p-5 text-left">
+        <h1>Partagez!</h1>
         <form id="write-article" class="write-article">
           <div class="form-group">
             <label for="article-title">Titre</label>

@@ -1,7 +1,8 @@
 <template>
-  <section class="container card text-left my-5 p-3">
-    <div class="jumbotron bg-dark text-info">
-      <h1>{{ this.$store.getters.getUsername }}</h1>
+  <section class="container card text-left my-5 p-3 shadow">
+    <h1>Profil</h1>
+    <div class="jumbotron bg-light text-info">
+      <h2>{{ this.$store.getters.getUsername }}</h2>
       <div class="row my-3">
         <div class="col info">
           <strong>Informations de contact</strong>
@@ -90,7 +91,7 @@ export default {
               alert("Le mot de passe est erroné!");
               this.$router.go();
             } else {
-              store.dispatch('logout');
+              store.dispatch("logout");
             }
           })
           .catch();

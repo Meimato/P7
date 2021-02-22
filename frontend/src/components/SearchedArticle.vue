@@ -1,7 +1,7 @@
 <template>
   <div class="searched-article">
     <section class="container">
-      <h2 class="text-left py-5">Résultat de la recherche</h2>
+      <h1 class="text-left py-5">Résultat de la recherche</h1>
       <ul id="search-list" class="row d-flex flex-column-reverse p-0 m-0"></ul>
     </section>
   </div>
@@ -21,10 +21,6 @@ export default {
       token: this.$store.state.token,
       userId: this.$store.state.userId,
     };
-    let myList = document.getElementById("search-list");
-    while (myList.hasChildNodes()) {
-      myList.removeChild(myList.firstChild);
-    }
     fetch("http://localhost:3000/api/article/?title=" + this.searchByTitle, {
       method: "GET",
       credentials: "same-origin",
