@@ -38,15 +38,15 @@ function createRoles() {
     id: 1,
     name: "user",
   })
-    .then()
-    .catch();
+    .then(() => { console.log("Role user CREATED!") })
+    .catch(() => { console.log("ERROR: CANNOT CREATE Role user!") });
 
   Role.create({
     id: 2,
     name: "moderator",
   })
-    .then()
-    .catch();
+    .then(() => { console.log("Role moderator CREATED!") })
+    .catch(() => { console.log("ERROR: CANNOT CREATE Role moderator!") });
 }
 
 function initializeDatabase() {
@@ -62,9 +62,9 @@ function initializeDatabase() {
         .then((user) => {
           user.setRoles([2]);
         })
-        .catch();
+        .catch(() => { console.log("ERROR: CANNOT CREATE moderator account!") });
     })
-    .catch();
+    .catch(() => { console.log("ERROR: Encryption failed!") });
 
   bcrypt
     .hash("user_password", 10)
@@ -78,9 +78,9 @@ function initializeDatabase() {
         .then((user) => {
           user.setRoles([1]);
         })
-        .catch();
+        .catch(() => { console.log("ERROR: CANNOT CREATE user_test account!") });
     })
-    .catch();
+    .catch(() => { console.log("ERROR: Encryption failed!") });
 
   bcrypt
     .hash("fff", 10)
@@ -94,9 +94,9 @@ function initializeDatabase() {
         .then((user) => {
           user.setRoles([1]);
         })
-        .catch();
+        .catch(() => { console.log("ERROR: CANNOT CREATE Foo account!") });
     })
-    .catch();
+    .catch(() => { console.log("ERROR: Encryption failed!") });
 }
 
 app.use("/images", express.static(path.join(__dirname, "images")));
