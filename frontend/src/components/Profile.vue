@@ -89,12 +89,12 @@ export default {
               data.status === 500
             ) {
               alert("Le mot de passe est erroné!");
-              this.$router.go();
-            } else {
-              store.dispatch("logout");
             }
+            store.dispatch("logout");
           })
-          .catch();
+          .catch(() => {
+            alert("Cannot find the user!")
+          });
       } else {
         alert("Mot de passe vide.");
       }
